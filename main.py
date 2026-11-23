@@ -11,8 +11,10 @@ ROAST = "My agent drew up a ten-year plan to get rich, then spent all day reload
 
 
 def main():
-    # Self-gate: the competition refuses any entry outside 1-200 chars.
+    # Self-gate: the competition refuses any entry outside 1-200 chars,
+    # and the brief requires a single line — enforce both before writing.
     assert 1 <= len(ROAST) <= 200, "roast outside the 1-200 char gate"
+    assert "\n" not in ROAST and ROAST.strip() == ROAST, "roast must be one clean line"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(ROAST)
